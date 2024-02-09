@@ -1,11 +1,11 @@
 package uvg.edu.gt;
 
 public class QuickSort {
-    public static void sort(int[] arr) {
+    public static <T extends Comparable<T>> void sort(T[] arr) {
         quickSort(arr, 0, arr.length - 1);
     }
 
-    private static void quickSort(int[] arr, int low, int high) {
+    private static <T extends Comparable<T>> void quickSort(T[] arr, int low, int high) {
         if (low < high) {
             int partitionIndex = partition(arr, low, high);
             quickSort(arr, low, partitionIndex - 1);
@@ -13,22 +13,24 @@ public class QuickSort {
         }
     }
 
-    private static int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
+    private static <T extends Comparable<T>> int partition(T[] arr, int low, int high) {
+        T pivot = arr[high];
         int i = (low - 1);
         for (int j = low; j < high; j++) {
-            if (arr[j] <= pivot) {
+            if (arr[j].compareTo(pivot) <= 0) {
                 i++;
-                int temp = arr[i];
+                T temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
             }
         }
 
-        int temp = arr[i + 1];
+        T temp = arr[i + 1];
         arr[i + 1] = arr[high];
         arr[high] = temp;
 
         return i + 1;
     }
 }
+
+

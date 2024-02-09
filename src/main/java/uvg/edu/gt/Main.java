@@ -46,19 +46,19 @@ public class Main {
 
         switch (algorithmName) {
             case "GnomeSort":
-                GnomeSort.sort(numbersToSort);
+                GnomeSort.sort(convertToInteger(numbersToSort));
                 break;
             case "MergeSort":
-                MergeSort.sort(numbersToSort);
+                MergeSort.sort(convertToInteger(numbersToSort));
                 break;
             case "QuickSort":
-                QuickSort.sort(numbersToSort);
+                QuickSort.sort(convertToInteger(numbersToSort));
                 break;
             case "RadixSort":
                 RadixSort.sort(numbersToSort);
                 break;
             case "HeapSort":
-                HeapSort.sort(numbersToSort);
+                HeapSort.sort(convertToInteger(numbersToSort));
                 break;
             default:
                 System.out.println("Algoritmo desconocido: " + algorithmName);
@@ -67,6 +67,12 @@ public class Main {
 
         long endTime = System.currentTimeMillis();
         System.out.println(algorithmName + " tomó: " + (endTime - startTime) + " ms para ordenar un array de " + numbersToSort.length + " números.");
+    }
+
+    private static Integer[] convertToInteger(int[] arr) {
+        return Arrays.stream(arr)       // Convierte el int[] a un Stream<Integer>
+                     .boxed()           // Convierte cada int en un Integer
+                     .toArray(Integer[]::new); // Recolecta los resultados en un Integer[]
     }
 
     private static int[] generateRandomArray(int size) {

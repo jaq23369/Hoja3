@@ -1,20 +1,20 @@
 package uvg.edu.gt;
 
 public class GnomeSort {
-    public static void sort(int[] arr) {
+    public static <T extends Comparable<T>> void sort(T[] arr) {
         int index = 0;
         while (index < arr.length) {
-            if (index == 0) {
-                index++;
-            }
-            if (arr[index] >= arr[index - 1]) {
+            if (index == 0 || arr[index].compareTo(arr[index - 1]) >= 0) {
                 index++;
             } else {
-                int temp = arr[index];
+                T temp = arr[index];
                 arr[index] = arr[index - 1];
                 arr[index - 1] = temp;
-                index--;
+                if (index > 1) {
+                    index--;
+                }
             }
         }
     }
 }
+
